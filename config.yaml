@@ -1,0 +1,54 @@
+dishes:
+    -   name: steak
+        meat: true
+        need_side_dish: true
+    -   name: cote de porc
+        meat: true
+        need_side_dish: true
+    -   name: escalope de dinde
+        meat: true
+        need_side_dish: true
+    -   name: pizza
+        meat: true
+        need_side_dish: false
+    -   name: pattes carbonara
+        meat: true
+        need_side_dish: false
+    -   name: truites
+        fish: true
+        need_side_dish: false
+    -   name: salade de quinoa
+        vegetarian: true
+        need_side_dish: false
+    -   name: gratin de courgettes
+        vegetarian: true
+        need_side_dish: false
+    -   name: dos_cabillaud
+        fish: true
+        need_side_dish: false
+        long_preparation: true
+    -   name: paupiette de veau
+        meat: true
+        need_side_dish: false
+        long_preparation: true
+    -   name: travers à la moutarde
+        meat: true
+        need_side_dish: false
+        long_preparation: true
+    -   name: travers au citron
+        meat: true
+        need_side_dish: false
+        long_preparation: true
+side_dishes:
+    -   name: pates
+    -   name: haricots
+    -   name: petit_poids
+    -   name: riz
+    -   name: salades
+    -   name: lentilles
+    -   name: quinoa
+
+
+
+
+
