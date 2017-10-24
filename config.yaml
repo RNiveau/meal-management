@@ -39,6 +39,9 @@ dishes:
         meat: true
         need_side_dish: false
         long_preparation: true
+    -   name: charcuterie
+        meat: true
+        need_side_dish: true
 side_dishes:
     -   name: pates
     -   name: haricots
@@ -47,8 +50,23 @@ side_dishes:
     -   name: salades
     -   name: lentilles
     -   name: quinoa
-
-
-
-
+calendar:
+    - name: lundi
+      evening: true
+    - name: mardi
+      evening: true
+    - name: mercredi
+      evening: true
+    - name: jeudi
+      evening: true
+    - name: vendredi
+      evening: true
+    - name: samedi
+      noon: true
+      evening: true
+    - name: dimanche
+      noon: true
+      evening: true
+      can_long_preparation: true
+      fix_evening: charcuterie
 

@@ -26,3 +26,14 @@ class Dish(Abstract):
 class SideDish(Abstract):
     def __init__(self):
         self.name = None
+
+
+class Day(Abstract):
+    def __init__(self):
+        self.name = None
+        self.evening = False
+        self.noon = False
+        self.can_long_preparation = False
+        self.fix_evening = None
+        self.fix_noon = None
+
