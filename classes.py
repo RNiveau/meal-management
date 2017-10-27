@@ -2,7 +2,7 @@ import inspect
 
 
 class Abstract:
-    def parseJson(self, json):
+    def parse_json(self, json):
         attrs = vars(self)
         for key, value in json.items():
             if key in attrs:
@@ -36,4 +36,5 @@ class Day(Abstract):
         self.can_long_preparation = False
         self.fix_evening = None
         self.fix_noon = None
-
+        self.evening_food = None
+        self.noon_food = None
