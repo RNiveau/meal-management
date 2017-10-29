@@ -36,5 +36,7 @@ class Day(Abstract):
         self.can_long_preparation = False
         self.fix_evening = None
         self.fix_noon = None
-        self.evening_food = None
-        self.noon_food = None
+        self.evening_dish = None
+        self.noon_dish = None
+        self.evening_side_dish = None
+        self.noon_side_dish = None

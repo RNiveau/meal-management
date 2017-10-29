@@ -38,18 +38,40 @@ def parse_side_dishes(yaml):
 def fixed_day(dishes, week):
     for day in week:
         if day.fix_evening is not None:
-            day.evening_food = get_dish_by_name(dishes, day.fix_evening)
+            day.evening_dish = get_dish_by_name(dishes, day.fix_evening)
+            dishes.remove(day.evening_dish)
         if day.fix_noon is not None:
-            day.noon_food = get_dish_by_name(dishes, day.fix_noon)
+            day.noon_dish = get_dish_by_name(dishes, day.fix_noon)
+            dishes.remove(day.noon_dish)
 
 
 def generate_week(dishes, side_dishes, week):
     fixed_day(dishes, week)
     for day in week:
-        if day.evening and day.evening_food is None:
-            rand = randint(0, len(dishes))
-            day.evening_food = dishes[rand]
+        if day.evening and day.evening_dish is None:
+            dish = get_dish(day, dishes)
+            day.evening_dish = dish
+            dishes.remove(dish)
+        if day.noon and day.noon_dish is None:
+            dish = get_dish(day, dishes)
+            day.noon_dish = dish
+            dishes.remove(dish)
 
+
+def get_dish(day, dishes):
+    dish_is_ok = False
+    dish = None
+    while dish_is_ok is False:
+        dish = get_random_dish(dishes)
+        dish_is_ok = True
+        if dish.long_preparation and day.can_long_preparation is False:
+            dish_is_ok = False
+    return dish
+
+
+def get_random_dish(dishes):
+    rand = randint(0, len(dishes) - 1)
+    return dishes[rand]
 
 
 if __name__ == '__main__':
@@ -59,4 +81,6 @@ if __name__ == '__main__':
     week = parse_calendar(yaml)
     generate_week(dishes, side_dishes, week)
     for day in week:
-        print("{}, {}".format(day.name, day.evening_food))
+        print("{}, {}".format(day.name, day.evening_dish))
+        if day.noon:
+            print("{}, {}".format(day.name, day.noon_dish))
