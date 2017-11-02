@@ -25,7 +25,6 @@ dishes:
         need_side_dish: false
     -   name: dos_cabillaud
         fish: true
-        need_side_dish: false
         long_preparation: true
     -   name: paupiette de veau
         meat: true
@@ -33,11 +32,9 @@ dishes:
         long_preparation: true
     -   name: travers à la moutarde
         meat: true
-        need_side_dish: false
         long_preparation: true
     -   name: travers au citron
         meat: true
-        need_side_dish: false
         long_preparation: true
     -   name: charcuterie
         meat: true
@@ -52,6 +49,7 @@ side_dishes:
         utilisability: 5
     -   name: lentilles
     -   name: quinoa
+    -   name: patate
 calendar:
     - name: lundi
       evening: true
