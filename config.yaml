@@ -45,9 +45,11 @@ dishes:
 side_dishes:
     -   name: pates
     -   name: haricots
+        utilisability: 2
     -   name: petit_poids
     -   name: riz
     -   name: salades
+        utilisability: 5
     -   name: lentilles
     -   name: quinoa
 calendar:
@@ -70,3 +72,6 @@ calendar:
       can_long_preparation: true
       fix_evening: charcuterie
 
+rules:
+  min_vegetarian: 1
+  min_fish: 1

@@ -26,6 +26,7 @@ class Dish(Abstract):
 class SideDish(Abstract):
     def __init__(self):
         self.name = None
+        self.utilisability = 1
 
 
 class Day(Abstract):
@@ -40,3 +41,8 @@ class Day(Abstract):
         self.noon_dish = None
         self.evening_side_dish = None
         self.noon_side_dish = None
+
+class Rule(Abstract):
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.value = kwargs.get('value')
