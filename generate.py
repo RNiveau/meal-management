@@ -53,6 +53,19 @@ def get_dish(day, dishes):
     return dish
 
 
+def is_vegetarian_day(day):
+    return (day.evening_dish is not None and day.evening_dish.vegetarian) or \
+     (day.noon_dish is not None and day.noon_dish.vegetarian)
+
+
+def apply_rules(week, rules, dishes, side_dishes):
+    rule = utils.get_element_by_name(rules, 'min_vegetarian')
+    vegetarian_days = filter(is_vegetarian_day, week)
+    if len(vegetarian_days) < rule.value:
+        print('tristesse')
+
+
+
 if __name__ == '__main__':
     yaml = load(FileIO('./config.yaml', 'r'))
     dishes = utils.parse_dishes(yaml)
@@ -60,6 +73,7 @@ if __name__ == '__main__':
     week = utils.parse_calendar(yaml)
     rules = utils.parse_rules(yaml)
     generate_week(dishes, side_dishes, week)
+    apply_rules(week, rules, dishes, side_dishes)
     for day in week:
         print("{}, {}, {}".format(day.name, day.evening_dish, day.evening_side_dish))
         if day.noon:
