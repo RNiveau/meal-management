@@ -1,4 +1,5 @@
 from random import shuffle
+from random import randint
 
 from classes import Day
 from classes import Dish
@@ -6,8 +7,13 @@ from classes import Rule
 from classes import SideDish
 
 
-def get_element_by_name(dishes, name):
-    return next(iter(filter(lambda x: x.name == name, dishes)))
+def get_element_by_name(elements, name):
+    return next(iter(filter(lambda x: x.name == name, elements)))
+
+
+def get_random_element(elements):
+    rand = randint(0, len(elements) - 1)
+    return elements[rand]
 
 
 def parse_dishes(yaml):
