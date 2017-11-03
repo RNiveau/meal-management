@@ -1,6 +1,3 @@
-import inspect
-
-
 class Abstract:
     def parse_json(self, json):
         attrs = vars(self)
