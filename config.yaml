@@ -39,6 +39,15 @@ dishes:
     -   name: charcuterie
         meat: true
         need_side_dish: true
+        cold_mets: true
+    -   name: cervelas
+        meat: true
+        need_side_dish: true
+        cold_mets: true
+    -   name: jambonneau
+        meat: true
+        need_side_dish: true
+        cold_meat: true
 side_dishes:
     -   name: pates
     -   name: haricots
@@ -73,3 +82,4 @@ calendar:
 rules:
   min_vegetarian: 1
   min_fish: 1
+  max_cold_meat: 2

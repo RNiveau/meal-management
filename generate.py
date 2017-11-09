@@ -1,8 +1,10 @@
 from io import FileIO
-from yaml import load
 from random import shuffle
 
+from yaml import load
+
 import utils
+from engine import Engine
 
 
 def fixed_day(dishes, week):
@@ -55,15 +57,7 @@ def get_dish(day, dishes):
 
 def is_vegetarian_day(day):
     return (day.evening_dish is not None and day.evening_dish.vegetarian) or \
-     (day.noon_dish is not None and day.noon_dish.vegetarian)
-
-
-def apply_rules(week, rules, dishes, side_dishes):
-    rule = utils.get_element_by_name(rules, 'min_vegetarian')
-    vegetarian_days = filter(is_vegetarian_day, week)
-    if len(vegetarian_days) < rule.value:
-        print('tristesse')
-
+           (day.noon_dish is not None and day.noon_dish.vegetarian)
 
 
 if __name__ == '__main__':
@@ -72,9 +66,9 @@ if __name__ == '__main__':
     side_dishes = utils.parse_side_dishes(yaml)
     week = utils.parse_calendar(yaml)
     rules = utils.parse_rules(yaml)
-    generate_week(dishes, side_dishes, week)
-    apply_rules(week, rules, dishes, side_dishes)
-    for day in week:
-        print("{}, {}, {}".format(day.name, day.evening_dish, day.evening_side_dish))
-        if day.noon:
-            print("{}, {}, {}".format(day.name, day.noon_dish, day.noon_side_dish))
+    Engine(rules=rules, dishes=dishes, side_dishes=side_dishes, week=week).setup()
+    # generate_week(dishes, side_dishes, week)
+    # for day in week:
+    #     print("{}, {}, {}".format(day.name, day.evening_dish, day.evening_side_dish))
+    #     if day.noon:
+    #         print("{}, {}, {}".format(day.name, day.noon_dish, day.noon_side_dish))

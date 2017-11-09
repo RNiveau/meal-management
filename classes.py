@@ -18,6 +18,7 @@ class Dish(Abstract):
         self.fish = False
         self.long_preparation = False
         self.vegetarian = False
+        self.cold_meat = False
 
 
 class SideDish(Abstract):
