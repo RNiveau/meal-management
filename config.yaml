@@ -39,11 +39,11 @@ dishes:
     -   name: charcuterie
         meat: true
         need_side_dish: true
-        cold_mets: true
+        cold_meat: true
     -   name: cervelas
         meat: true
         need_side_dish: true
-        cold_mets: true
+        cold_meat: true
     -   name: jambonneau
         meat: true
         need_side_dish: true

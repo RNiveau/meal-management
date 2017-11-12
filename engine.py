@@ -10,6 +10,7 @@ class Engine:
         self._dishes_poll = []
         self._dishes_number = 0
         self._long_preparation = 0
+        self._max_cold_meat = 0
 
     def setup(self):
         vegetarians = self._get_vegetarian_dishes()
@@ -18,6 +19,7 @@ class Engine:
         min_fish = utils.get_element_by_name(self.rules, 'min_fish')
         max_cold_meat = utils.get_element_by_name(self.rules, 'max_cold_meat')
 
+        self._max_cold_meat = max_cold_meat.value
         self._dishes_number, self._long_preparation = self._get_dishes_number_and_long_preparation()
         self._min_rules(min_vegetarian.value, vegetarians)
         self._min_rules(min_fish.value, fishes)
@@ -30,8 +32,13 @@ class Engine:
                 dish_is_ok = True
                 if dish.long_preparation and self._long_preparation <= 0:
                     dish_is_ok = False
-                elif dish.long_preparation:
-                    self._long_preparation -= 1
+                elif dish.cold_meat and self._max_cold_meat <= 0:
+                    dish_is_ok = False
+                else:
+                    if dish.long_preparation:
+                        self._long_preparation -= 1
+                    if dish.cold_meat:
+                        self._max_cold_meat -= 1
             self._dishes_poll.append(dish)
             self.dishes.remove(dish)
 
@@ -78,11 +85,15 @@ class Engine:
                 dish = utils.get_element_by_name(self.dishes, day.fix_noon)
                 if dish.long_preparation:
                     self._long_preparation -= 1
+                if dish.cold_meat:
+                    self._max_cold_meat -= 1
                 self._dishes_poll.append(dish)
                 self.dishes.remove(dish)
             if day.fix_evening is not None:
                 dish = utils.get_element_by_name(self.dishes, day.fix_evening)
                 if dish.long_preparation:
                     self._long_preparation -= 1
+                if dish.cold_meat:
+                    self._max_cold_meat -= 1
                 self._dishes_poll.append(dish)
                 self.dishes.remove(dish)
