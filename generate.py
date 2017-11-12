@@ -1,5 +1,6 @@
 from io import FileIO
 from random import shuffle
+import logging
 
 from yaml import load
 
@@ -61,6 +62,9 @@ def is_vegetarian_day(day):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename='generate.log', level=logging.DEBUG,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')
     yaml = load(FileIO('./config.yaml', 'r'))
     dishes = utils.parse_dishes(yaml)
     side_dishes = utils.parse_side_dishes(yaml)
