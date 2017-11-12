@@ -8,6 +8,8 @@ class Engine:
         self.side_dishes = kwargs.get("side_dishes")
         self.week = kwargs.get("week")
         self._dishes_poll = []
+        self._dishes_number = 0
+        self._long_preparation = 0
 
     def setup(self):
         vegetarians = self._get_vegetarian_dishes()
@@ -16,23 +18,22 @@ class Engine:
         min_fish = utils.get_element_by_name(self.rules, 'min_fish')
         max_cold_meat = utils.get_element_by_name(self.rules, 'max_cold_meat')
 
-        dishes_number, long_preparation = self._get_dishes_number_and_long_preparation()
-        manage long_preparation in rule
+        self._dishes_number, self._long_preparation = self._get_dishes_number_and_long_preparation()
         self._min_rules(min_vegetarian.value, vegetarians)
         self._min_rules(min_fish.value, fishes)
         self._set_fix_days()
 
-        for i in range(len(self._dishes_poll) - 1, dishes_number):
+        for i in range(len(self._dishes_poll) - 1, self._dishes_number):
             dish_is_ok = False
             while dish_is_ok is False:
                 dish = utils.get_random_element(self.dishes)
                 dish_is_ok = True
-                if dish.long_preparation and long_preparation == 0:
+                if dish.long_preparation and self._long_preparation <= 0:
                     dish_is_ok = False
                 elif dish.long_preparation:
-                    long_preparation -= 1
-                self._dishes_poll.append(dish)
-                self.dishes.remove(dish)
+                    self._long_preparation -= 1
+            self._dishes_poll.append(dish)
+            self.dishes.remove(dish)
 
         for dish in self._dishes_poll:
             print(dish)
@@ -40,15 +41,22 @@ class Engine:
         return self
 
     def _get_vegetarian_dishes(self):
-        return filter(lambda x: x.vegetarian, self.dishes)
+        return list(filter(lambda x: x.vegetarian, self.dishes))
 
     def _get_fish_dishes(self):
-        return filter(lambda x: x.fish, self.dishes)
+        return list(filter(lambda x: x.fish, self.dishes))
 
     def _min_rules(self, mini, tab):
         for i in range(0, mini):
             if len(tab) > 0:
-                element = utils.get_random_element(tab)
+                dish_is_ok = False
+                while dish_is_ok is False:
+                    element = utils.get_random_element(tab)
+                    dish_is_ok = True
+                    if element.long_preparation and self._long_preparation <= 0:
+                        dish_is_ok = False
+                    elif element.long_preparation:
+                        self._long_preparation -= 1
                 self._dishes_poll.append(element)
                 tab.remove(element)
 
@@ -68,9 +76,13 @@ class Engine:
         for day in self.week:
             if day.fix_noon is not None:
                 dish = utils.get_element_by_name(self.dishes, day.fix_noon)
+                if dish.long_preparation:
+                    self._long_preparation -= 1
                 self._dishes_poll.append(dish)
                 self.dishes.remove(dish)
             if day.fix_evening is not None:
                 dish = utils.get_element_by_name(self.dishes, day.fix_evening)
+                if dish.long_preparation:
+                    self._long_preparation -= 1
                 self._dishes_poll.append(dish)
                 self.dishes.remove(dish)
