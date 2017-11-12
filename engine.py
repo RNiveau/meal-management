@@ -15,7 +15,7 @@ class Engine:
         self._max_cold_meat = 0
         self._logger = logging.getLogger(__name__)
 
-def setup(self):
+    def setup(self):
         vegetarians = self._get_vegetarian_dishes()
         fishes = self._get_fish_dishes()
         min_vegetarian = utils.get_element_by_name(self.rules, 'min_vegetarian')
@@ -46,8 +46,7 @@ def setup(self):
             self.dishes.remove(dish)
 
         for dish in self._dishes_poll:
-            self._logger(dish)
-
+            self._logger.info(dish)
         return self
 
     def _get_vegetarian_dishes(self):
