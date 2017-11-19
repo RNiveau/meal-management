@@ -1,4 +1,5 @@
 import logging
+from random import shuffle
 
 import utils
 
@@ -45,9 +46,46 @@ class Engine:
             self._dishes_poll.append(dish)
             self.dishes.remove(dish)
 
+        self._logger.info("Dishes poll:")
         for dish in self._dishes_poll:
             self._logger.info(dish)
         return self
+
+    def generate_week(self):
+        self._generate_fix_day()
+        for day in self.week:
+            shuffle(self._dishes_poll)
+            if day.evening and day.evening_dish is None:
+                self._generate_dish(day, self._dishes_poll, self.side_dishes, 'evening')
+            if day.noon and day.noon_dish is None:
+                self._generate_dish(day, self._dishes_poll, self.side_dishes, 'noon')
+        return self.week
+
+    def _generate_dish(self, day, dishes, side_dishes, part_day):
+        dish = self._get_dish(day, dishes)
+        side_dish = None
+        if dish.need_side_dish:
+            side_dish = utils.get_random_element(side_dishes)
+            side_dish.utilisability -= 1
+            if side_dish.utilisability <= 0:
+                side_dishes.remove(side_dish)
+        dishes.remove(dish)
+        if part_day == 'evening':
+            day.evening_dish = dish
+            day.evening_side_dish = side_dish
+        else:
+            day.noon_dish = dish
+            day.noon_side_dish = side_dish
+
+    def _get_dish(self, day, dishes):
+        dish_is_ok = False
+        dish = None
+        while dish_is_ok is False:
+            dish = utils.get_random_element(dishes)
+            dish_is_ok = True
+            if dish.long_preparation and day.can_long_preparation is False:
+                dish_is_ok = False
+        return dish
 
     def _get_vegetarian_dishes(self):
         return list(filter(lambda x: x.vegetarian, self.dishes))
@@ -67,6 +105,7 @@ class Engine:
                     elif element.long_preparation:
                         self._long_preparation -= 1
                 self._dishes_poll.append(element)
+                self.dishes.remove(element)
                 tab.remove(element)
 
     def _get_dishes_number_and_long_preparation(self):
@@ -99,3 +138,13 @@ class Engine:
                     self._max_cold_meat -= 1
                 self._dishes_poll.append(dish)
                 self.dishes.remove(dish)
+
+    def _generate_fix_day(self):
+        for day in self.week:
+            if day.fix_evening is not None:
+                day.evening_dish = utils.get_element_by_name(self._dishes_poll, day.fix_evening)
+                self._dishes_poll.remove(day.evening_dish)
+            if day.fix_noon is not None:
+                day.noon_dish = utils.get_element_by_name(self._dishes_poll, day.fix_noon)
+                self._dishes_poll.remove(day.noon_dish)
+
