@@ -21,9 +21,21 @@ if __name__ == '__main__':
     engine = Engine(rules=rules, dishes=dishes, side_dishes=side_dishes, week=week).setup()
     week = engine.generate_week()
     logger.info("Generated week:")
+    message = ""
     for day in week:
-        logger.info("{}, {}, {}".format(day.name, day.evening_dish, day.evening_side_dish))
         if day.noon:
-            logger.info("{}, {}, {}".format(day.name, day.noon_dish, day.noon_side_dish))
+            message += "{} midi: {}".format(day.name, day.noon_dish.name)
+            if day.noon_dish.need_side_dish:
+                message += " avec {}".format(day.noon_side_dish.name)
+            message += "\n"
+        if day.evening:
+            message += "{} soir: {}".format(day.name, day.evening_dish.name)
+            if day.evening_dish.need_side_dish and day.evening_side_dish is not None:
+                message += " avec {}".format(day.evening_side_dish.name)
+            elif day.evening_dish.need_side_dish:
+                message += " avec ???"
+            message += "\n"
+    logger.info(message)
     client = MessagerClient(app['facebook_id'])
-    client.send_message(app['sender_id'][0], 'toto')
+    client.send_message(app['sender_id'][0], message)
+    client.send_message(app['sender_id'][1], message)
