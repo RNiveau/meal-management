@@ -2,12 +2,39 @@ dishes:
     -   name: steak
         meat: true
         need_side_dish: true
+    -   name: poulet roti
+        meat: true
+        need_side_dish: true
+    -   name: agneaux
+        meat: true
+        need_side_dish: true
+    -   name: veau
+        meat: true
+        need_side_dish: true
+    -   name: oeufs sur le plat
+        meat: true
+        need_side_dish: true
     -   name: cote de porc
         meat: true
         need_side_dish: true
-    -   name: escalope de dinde
+    -   name: escalope de dinde sauce champignon
         meat: true
         need_side_dish: true
+    -   name: tarte / quiche aux légumes + lardon
+        meat: true
+        need_side_dish: false
+    -   name: croque monsieur
+        meat: true
+        need_side_dish: false
+    -   name: filet mignon de porc
+        meat: true
+        need_side_dish: true
+    -   name: salade endive / avocat / chèvre chaud / lardon
+        meat: true
+        need_side_dish: false
+    -   name: aiguillette de poulet - riz aux champignons
+        meat: true
+        need_side_dish: false
     -   name: pizza
         meat: true
         need_side_dish: false
@@ -23,7 +50,10 @@ dishes:
     -   name: gratin de courgettes
         vegetarian: true
         need_side_dish: false
-    -   name: dos_cabillaud
+    -   name: dos de cabillaud
+        fish: true
+        long_preparation: true
+    -   name: sole meuniere
         fish: true
         long_preparation: true
     -   name: paupiette de veau
@@ -48,6 +78,18 @@ dishes:
         meat: true
         need_side_dish: true
         cold_meat: true
+    -   name: hamburger
+        meat: true
+        need_side_dish: false
+    -   name: japonais
+        fish: true
+        need_side_dish: false
+    -   name: risotto
+        meat: true
+        need_side_dish: false
+    -   name: risotto sans viande
+        vegetarian: true
+        need_side_dish: false
 side_dishes:
     -   name: pates
     -   name: haricots
@@ -57,8 +99,15 @@ side_dishes:
     -   name: salades
         utilisability: 5
     -   name: lentilles
-    -   name: quinoa
-    -   name: patate
+    -   name: patates douce
+    -   name: ratatouille
+    -   name: patates roti
+    -   name: salade endive - bétrave
+    -   name: poireaux vinaigrette
+    -   name: légumes vapeurs
+    -   name: épinard à la crème
+    -   name: gratin
+    -   name: boulgour
 calendar:
     - name: lundi
       evening: true
