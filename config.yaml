@@ -20,7 +20,7 @@ dishes:
     -   name: escalope de dinde sauce champignon
         meat: true
         need_side_dish: true
-    -   name: tarte / quiche aux légumes + lardon
+    -   name: tarte / quiche aux legumes + lardon
         meat: true
         need_side_dish: false
     -   name: croque monsieur
@@ -29,7 +29,7 @@ dishes:
     -   name: filet mignon de porc
         meat: true
         need_side_dish: true
-    -   name: salade endive / avocat / chèvre chaud / lardon
+    -   name: salade endive / avocat / chevre chaud / lardon
         meat: true
         need_side_dish: false
     -   name: aiguillette de poulet - riz aux champignons
@@ -60,7 +60,7 @@ dishes:
         meat: true
         need_side_dish: false
         long_preparation: true
-    -   name: travers à la moutarde
+    -   name: travers a la moutarde
         meat: true
         long_preparation: true
     -   name: travers au citron
@@ -102,10 +102,10 @@ side_dishes:
     -   name: patates douce
     -   name: ratatouille
     -   name: patates roti
-    -   name: salade endive - bétrave
+    -   name: salade endive - betrave
     -   name: poireaux vinaigrette
-    -   name: légumes vapeurs
-    -   name: épinard à la crème
+    -   name: legumes vapeurs
+    -   name: epinard a la creme
     -   name: gratin
     -   name: boulgour
 calendar:
