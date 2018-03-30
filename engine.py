@@ -2,6 +2,7 @@ import logging
 from random import shuffle
 
 import utils
+from classes import Rule
 
 
 class Engine:
@@ -19,9 +20,9 @@ class Engine:
     def setup(self):
         vegetarians = self._get_vegetarian_dishes()
         fishes = self._get_fish_dishes()
-        min_vegetarian = utils.get_element_by_name(self.rules, 'min_vegetarian')
-        min_fish = utils.get_element_by_name(self.rules, 'min_fish')
-        max_cold_meat = utils.get_element_by_name(self.rules, 'max_cold_meat')
+        min_vegetarian = utils.get_element_by_name(self.rules, 'min_vegetarian', Rule(value=0))
+        min_fish = utils.get_element_by_name(self.rules, 'min_fish', Rule(value=0))
+        max_cold_meat = utils.get_element_by_name(self.rules, 'max_cold_meat', Rule(value=7))
 
         self._max_cold_meat = max_cold_meat.value
         self._dishes_number, self._long_preparation = self._get_dishes_number_and_long_preparation()

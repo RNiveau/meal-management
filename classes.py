@@ -40,6 +40,7 @@ class Day(Abstract):
         self.evening_side_dish = None
         self.noon_side_dish = None
 
+
 class Rule(Abstract):
     def __init__(self, **kwargs):
         self.name = kwargs.get('name')

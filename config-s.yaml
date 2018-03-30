@@ -1,56 +1,39 @@
-hello: Pour les parents
+hello: Pour Poupette
 dishes:
     -   name: steak
         meat: true
-        need_side_dish: true
     -   name: poulet roti
         meat: true
-        need_side_dish: true
     -   name: agneaux
         meat: true
-        need_side_dish: true
     -   name: veau
         meat: true
-        need_side_dish: true
     -   name: oeufs sur le plat
         meat: true
-        need_side_dish: true
     -   name: cote de porc
         meat: true
-        need_side_dish: true
     -   name: escalope de dinde sauce champignon
         meat: true
-        need_side_dish: true
     -   name: tarte / quiche aux legumes + lardon
         meat: true
-        need_side_dish: false
     -   name: croque monsieur
         meat: true
-        need_side_dish: false
     -   name: filet mignon de porc
         meat: true
-        need_side_dish: true
     -   name: salade endive / avocat / chevre chaud / lardon
         meat: true
-        need_side_dish: false
     -   name: aiguillette de poulet - riz aux champignons
         meat: true
-        need_side_dish: false
     -   name: pizza
         meat: true
-        need_side_dish: false
     -   name: pattes carbonara
         meat: true
-        need_side_dish: false
     -   name: truites
         fish: true
-        need_side_dish: false
     -   name: salade de quinoa
         vegetarian: true
-        need_side_dish: false
     -   name: gratin de courgettes
         vegetarian: true
-        need_side_dish: false
     -   name: dos de cabillaud
         fish: true
         long_preparation: true
@@ -59,7 +42,6 @@ dishes:
         long_preparation: true
     -   name: paupiette de veau
         meat: true
-        need_side_dish: false
         long_preparation: true
     -   name: travers a la moutarde
         meat: true
@@ -69,46 +51,15 @@ dishes:
         long_preparation: true
     -   name: charcuterie
         meat: true
-        need_side_dish: true
         cold_meat: true
     -   name: cervelas
         meat: true
-        need_side_dish: true
         cold_meat: true
     -   name: jambonneau
         meat: true
-        need_side_dish: true
         cold_meat: true
     -   name: hamburger
         meat: true
-        need_side_dish: false
-    -   name: japonais
-        fish: true
-        need_side_dish: false
-    -   name: risotto
-        meat: true
-        need_side_dish: false
-    -   name: risotto sans viande
-        vegetarian: true
-        need_side_dish: false
-side_dishes:
-    -   name: pates
-    -   name: haricots
-        utilisability: 2
-    -   name: petit_poids
-    -   name: riz
-    -   name: salades
-        utilisability: 5
-    -   name: lentilles
-    -   name: patates douce
-    -   name: ratatouille
-    -   name: patates roti
-    -   name: salade endive - betrave
-    -   name: poireaux vinaigrette
-    -   name: legumes vapeurs
-    -   name: epinard a la creme
-    -   name: gratin
-    -   name: boulgour
 calendar:
     - name: vendredi
       evening: true
@@ -118,8 +69,6 @@ calendar:
     - name: dimanche
       noon: true
       evening: true
-      can_long_preparation: true
-      fix_evening: charcuterie
     - name: lundi
       evening: true
     - name: mardi
@@ -128,8 +77,3 @@ calendar:
       evening: true
     - name: jeudi
       evening: true
-
-rules:
-  min_vegetarian: 1
-  min_fish: 1
-  max_cold_meat: 2

@@ -7,8 +7,11 @@ from classes import Rule
 from classes import SideDish
 
 
-def get_element_by_name(elements, name):
-    return next(iter(filter(lambda x: x.name == name, elements)))
+def get_element_by_name(elements, name, default_value=None):
+    tab = filter(lambda x: x.name == name, elements)
+    if len(tab) > 0:
+        return tab[0]
+    return default_value
 
 
 def get_random_element(elements):
@@ -33,14 +36,16 @@ def parse_calendar(yaml):
 
 def parse_side_dishes(yaml):
     side_dishes = []
-    for side_dish in yaml['side_dishes']:
-        side_dishes.append(SideDish().parse_json(side_dish))
-    shuffle(side_dishes)
+    if 'side_dishes' in yaml:
+        for side_dish in yaml['side_dishes']:
+            side_dishes.append(SideDish().parse_json(side_dish))
+        shuffle(side_dishes)
     return side_dishes
 
 
 def parse_rules(yaml):
     rules = []
-    for key, value in yaml['rules'].items():
-        rules.append(Rule(name=key, value=value))
+    if 'rules' in yaml:
+        for key, value in yaml['rules'].items():
+            rules.append(Rule(name=key, value=value))
     return rules
