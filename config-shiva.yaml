@@ -1,0 +1,74 @@
+hello: Pour Poupette
+dishes:
+    -   name: chou fleur
+        need_side_dish: true
+    -   name: carotte
+        need_side_dish: true
+    -   name: potiron
+        need_side_dish: true
+    -   name: petits pois
+        need_side_dish: true
+    -   name: betterave
+        need_side_dish: true
+    -   name: epinards
+        need_side_dish: true
+    -   name: brocolis
+        need_side_dish: true
+    -   name: haricots verts
+        need_side_dish: true
+    -   name: courgette
+        need_side_dish: true
+    -   name: patate douce
+        need_side_dish: true
+    -   name: artichaut
+        need_side_dish: true
+    -   name: poireau
+        need_side_dish: true
+    -   name: tomate
+        need_side_dish: true
+    -   name: endive
+        need_side_dish: true
+    -   name: avocat
+        need_side_dish: true
+    -   name: concombre
+        need_side_dish: true
+    -   name: poivron
+        need_side_dish: true
+    -   name: butternut
+        need_side_dish: true
+    -   name: radis
+        need_side_dish: true
+    -   name: salade
+        need_side_dish: true
+side_dishes:
+    -   name: patates
+        utilisability: 3
+    -   name: riz
+        utilisability: 3
+    -   name: pates
+        utilisability: 3
+    -   name: semoule
+        utilisability: 3
+    -   name: ble
+        utilisability: 3
+    -   name: quinoa
+        utilisability: 3
+    -   name: boulghour
+        utilisability: 3
+calendar:
+    - name: vendredi
+      evening: true
+    - name: samedi
+      noon: true
+      evening: true
+    - name: dimanche
+      noon: true
+      evening: true
+    - name: lundi
+      evening: true
+    - name: mardi
+      evening: true
+    - name: mercredi
+      evening: true
+    - name: jeudi
+      evening: true
