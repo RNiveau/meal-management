@@ -1,8 +1,12 @@
+import json
 import logging
 from random import shuffle
+from os import path
 
 import utils
 from classes import Rule
+
+END_SAVE_FILE = '.last_week.json'
 
 
 class Engine:
@@ -11,6 +15,8 @@ class Engine:
         self.dishes = kwargs.get("dishes")
         self.side_dishes = kwargs.get("side_dishes")
         self.week = kwargs.get("week")
+        self.config_file = kwargs.get("config_file")
+        self._save_file = path.basename(self.config_file) + END_SAVE_FILE
         self._dishes_poll = []
         self._dishes_number = 0
         self._long_preparation = 0
@@ -30,6 +36,11 @@ class Engine:
         self._min_rules(min_fish.value, fishes)
         self._set_fix_days()
 
+        if path.exists(self._save_file):
+            with open("./{}".format(self._save_file), 'r') as file:
+                save = json.loads(file.read())
+                self.dishes = list(filter(lambda x: x.name not in save, self.dishes))
+
         for i in range(len(self._dishes_poll) - 1, self._dishes_number):
             dish_is_ok = False
             while dish_is_ok is False:
@@ -46,7 +57,6 @@ class Engine:
                         self._max_cold_meat -= 1
             self._dishes_poll.append(dish)
             self.dishes.remove(dish)
-
         self._logger.info("Dishes poll:")
         for dish in self._dishes_poll:
             self._logger.info(dish)
@@ -61,6 +71,16 @@ class Engine:
             if day.noon and day.noon_dish is None:
                 self._generate_dish(day, self._dishes_poll, self.side_dishes, 'noon')
         return self.week
+
+    def write_week(self):
+        with open("./{}".format(self._save_file), 'w+') as file:
+            file.write("[")
+            for day in self.week:
+                if day.evening and day.fix_evening is None:
+                    file.write('"{}",'.format(day.evening_dish.name))
+                if day.noon and day.fix_noon is None:
+                    file.write('"{}",'.format(day.noon_dish.name))
+            file.write('""]')
 
     def _generate_dish(self, day, dishes, side_dishes, part_day):
         dish = self._get_dish(day, dishes)
@@ -121,6 +141,7 @@ class Engine:
                 number += 1
         return number, long_preparation
 
+
     def _set_fix_days(self):
         for day in self.week:
             if day.fix_noon is not None:
@@ -148,4 +169,3 @@ class Engine:
             if day.fix_noon is not None:
                 day.noon_dish = utils.get_element_by_name(self._dishes_poll, day.fix_noon)
                 self._dishes_poll.remove(day.noon_dish)
-

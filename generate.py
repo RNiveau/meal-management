@@ -8,24 +8,8 @@ from messager_client import MessagerClient
 import utils
 from engine import Engine
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Create meal for a week")
-    parser.add_argument('--config', action="store", dest="config_file", default="./config.yaml" ,type=str)
-    argument = parser.parse_args()
 
-    logging.basicConfig(filename='generate.log', level=logging.DEBUG,
-                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                        datefmt='%m/%d/%Y %I:%M:%S %p')
-
-    logger = logging.getLogger(__name__)
-    yaml = load(FileIO(argument.config_file, 'r'))
-    app = load(FileIO('./app.yaml', 'r'))
-    dishes = utils.parse_dishes(yaml)
-    side_dishes = utils.parse_side_dishes(yaml)
-    week = utils.parse_calendar(yaml)
-    rules = utils.parse_rules(yaml)
-    engine = Engine(rules=rules, dishes=dishes, side_dishes=side_dishes, week=week).setup()
-    week = engine.generate_week()
+def generate_message(week):
     logger.info("Generated week:")
     message = "{}\n".format(yaml['hello'])
     for day in week:
@@ -42,6 +26,35 @@ if __name__ == '__main__':
                 message += " avec ???"
             message += "\n"
     logger.info(message)
+    return message
+
+
+def send_message(app, message):
     client = MessagerClient(app['facebook_id'])
     for sender in app['sender_id']:
         client.send_message(sender, message)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Create meal for a week")
+    parser.add_argument('--config', action="store", dest="config_file", default="./config.yaml" ,type=str)
+    argument = parser.parse_args()
+
+    logging.basicConfig(filename='generate.log', level=logging.DEBUG,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')
+
+    logger = logging.getLogger(__name__)
+    config_file = argument.config_file
+    yaml = load(FileIO(config_file, 'r'))
+    app = load(FileIO('./app.yaml', 'r'))
+    dishes = utils.parse_dishes(yaml)
+    side_dishes = utils.parse_side_dishes(yaml)
+    week = utils.parse_calendar(yaml)
+    rules = utils.parse_rules(yaml)
+    engine = Engine(rules=rules, dishes=dishes, side_dishes=side_dishes, week=week, config_file=config_file).setup()
+    week = engine.generate_week()
+    if 'save_week' in yaml and yaml:
+        engine.write_week()
+    message = generate_message(week)
+    send_message(app, message)

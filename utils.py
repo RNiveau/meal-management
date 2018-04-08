@@ -8,7 +8,7 @@ from classes import SideDish
 
 
 def get_element_by_name(elements, name, default_value=None):
-    tab = filter(lambda x: x.name == name, elements)
+    tab = list(filter(lambda x: x.name == name, elements))
     if len(tab) > 0:
         return tab[0]
     return default_value
