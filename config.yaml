@@ -91,6 +91,12 @@ dishes:
     -   name: risotto sans viande
         vegetarian: true
         need_side_dish: false
+    -   name: salade crudite
+        meat: true
+        need_side_dish: false
+    -   name: crepe picard / salade
+        vegetarian: true
+        need_side_dish: false
 side_dishes:
     -   name: pates
     -   name: haricots
